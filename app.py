@@ -84,14 +84,15 @@ def get_db_connection():
     return sqlite3.connect(DB_FILE)
 
 # ==========================================
-# FUNGSIONALITAS WHATSAPP LINK GENERATOR
+# FUNGSIONALITAS WHATSAPP LINK GENERATOR (OPSI 3)
 # ==========================================
 def kirim_wa_link(no_wa, nama_siswa, kelas, status, konteks_absen="Hari ini"):
     clean_wa = ''.join(filter(str.isdigit, str(no_wa)))
     if clean_wa.startswith('0'):
         clean_wa = '62' + clean_wa[1:]
     
-    pesan = f"Assalamualaikum Bapak/Ibu Wali Murid dari {nama_siswa} (Kelas {kelas}). Kami menginformasikan bahwa pada {konteks_absen}, anak Anda tercatat dengan keterangan: *{status.upper()}* tanpa konfirmasi ke pihak sekolah. Mohon segera berikan klarifikasi. Terima kasih."
+    # Menggunakan Format Opsi 3 yang Ringkas & To The Point
+    pesan = f"Assalamualaikum Wr. Wb. Bapak/Ibu Wali Murid, kami dari Pihak Sekolah SDN KECIL OGOMOJOLO menginfokan bahwa *{nama_siswa}* Kelas *{kelas}* *TIDAK HADIR* tanpa keterangan pada {konteks_absen}. Mohon segera hubungi pihak sekolah untuk konfirmasi. Terima kasih."
     pesan_encoded = urllib.parse.quote(pesan)
     return f"https://wa.me/{clean_wa}?text={pesan_encoded}"
 
